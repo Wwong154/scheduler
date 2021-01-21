@@ -16,7 +16,8 @@ export default function InterviewerList(props) {
         selected={props.value === interviewer.id}
         onChange={() => props.onChange(interviewer.id)}
         />
-      })}
+      })
+      }
       </ul>
     </section>
   );
