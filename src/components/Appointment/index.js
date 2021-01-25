@@ -52,7 +52,6 @@ export default function Appointment(props) {
   }
 
   function edit() {
-    console.log(props.interview.interviewer.id)
     transition(EDIT);
   }
 
