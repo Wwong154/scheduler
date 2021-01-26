@@ -25,9 +25,6 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {
-    if (!name || ! interviewer) {
-      alert("Please enter both field");
-    } else {
       const interview = {
         student: name,
         interviewer
@@ -37,7 +34,6 @@ export default function Appointment(props) {
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE,true));
-    }
   }
 
   function confirm() {
