@@ -1,5 +1,10 @@
 import React from "react";
-
+/*
+Error card when there is problem deleting / saving appointment
+Take in :
+massage: error massage
+onClose: function [should also be back() in this project]
+*/
 export default function Error(props) {
   return (
     <main className="appointment__card appointment__card--error">

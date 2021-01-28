@@ -8,7 +8,9 @@ import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error"
 import { useVisualMode } from "hooks/useVisualMode";
 import "components/Appointment/styles.scss";
-
+/*
+The nav of the time slot card
+*/
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -22,7 +24,7 @@ const ERROR_DELETE = "ERROR_DELETE";
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
-  );
+  ); //if appointment, show it, else show that it is empty slot
 
   function save(name, interviewer) {
       const interview = {
@@ -31,26 +33,27 @@ export default function Appointment(props) {
       };
       transition(SAVING)
       props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE,true));
+      .bookInterview(props.id, interview)//send data to db
+      .then(() => transition(SHOW))//take user to show when success
+      .catch(() => transition(ERROR_SAVE,true));//else show error
   }
 
-  function confirm() {
+  function confirm() { //idk why I even
     transition(CONFIRM);
   }
 
-  function cancel() {
+  function cancel() {//delete appoinment
     transition(DELETING,true);
-    props.cancelInterview(props.id)
-    .then(() => transition(EMPTY)) 
-    .catch(() => transition(ERROR_DELETE,true));
+    props.cancelInterview(props.id)//send req to db for delete
+    .then(() => transition(EMPTY)) //take user to empty when success
+    .catch(() => transition(ERROR_DELETE,true));//else show error
   }
 
-  function edit() {
+  function edit() { //again, why? idk.
     transition(EDIT);
   }
 
+  //refer to each corrisponding js for more detail
   return <article className="appointment" data-testid="appointment">
     <Header time={props.time} />
     {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}

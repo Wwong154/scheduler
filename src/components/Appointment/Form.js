@@ -1,28 +1,42 @@
 import React, { useState } from 'react';
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
+/*
+Where user will edit / make appointment
+When creating, take in:
+interviewers: list of interviewers of the day
+onSave: function [save(name, interviewer), takes student name and interviewer name and craete new interview for time slot, refer to index.js for detail]
+onCancel: function [back(), should take user back 1 page/state]
 
+When editing, also take in the following:
+name: The student name that why in db for this appointment
+value: The interviewer that is booked for this appointment
+*/
 export default function Form(props) {
   let [name, setName] = useState(props.name || "");
   let [value, setValue] = useState(props.value || null);
   const [error, setError] = useState("");
 
-  function reset() {
+  function reset() { //clear name
     setName("");
     setValue(null);
   }
 
-  function cancel() {
+  function cancel() { //call on reset then take user back
     reset();
     props.onCancel();
   }
 
-  function validate() {
-    if (name === "") {
+  function validate() { 
+    if (name === "") {//check if user fill in name
       setError("Student name cannot be blank");
       return;
     }
-    setError("");
+    if (!value) {//check if user select a interviewer
+      setError("Please select a interviewer");
+      return;
+    }
+    setError("");//clear error field
     props.onSave(name, value);
   }
 

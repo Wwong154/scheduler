@@ -1,5 +1,5 @@
 import React from "react";
-
+//Show the time for timeslot
 export default function Header(props) {
   return (
     <header className="appointment__time">

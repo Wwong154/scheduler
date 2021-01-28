@@ -1,6 +1,6 @@
 import React from "react";
 import DayListItem from "components/DayListItem";
-
+//load all day available
 export default function DayList(props) {
   return (
     <ul>
